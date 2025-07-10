@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.functions import Lower
 
 
 class Movie(models.Model):
@@ -13,7 +14,14 @@ class Movie(models.Model):
 
 
 class Genre(models.Model):
-    name = models.CharField(max_length=255, unique=True)
+    name = models.CharField(max_length=255, unique=False)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                Lower("name"), name="unique_genre_name_ci"
+            )
+        ]
 
     def __str__(self):
         return self.name
@@ -34,3 +42,6 @@ class CinemaHall(models.Model):
 
     def __str__(self):
         return self.name
+
+    def capacity(self):
+        return self.rows * self.seats_in_row
