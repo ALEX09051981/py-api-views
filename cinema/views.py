@@ -7,7 +7,11 @@ from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 
 from cinema.models import Movie, Genre, Actor, CinemaHall
-from cinema.serializers import MovieSerializer, GenreSerializer, ActorSerializer, CinemaHallSerializer
+from cinema.serializers import (MovieSerializer,
+                                GenreSerializer,
+                                ActorSerializer,
+                                CinemaHallSerializer
+                                )
 
 
 @api_view(["GET", "POST"])
@@ -88,15 +92,15 @@ class ActorListCreateAPIView(
         mixins.ListModelMixin,
         mixins.CreateModelMixin,
         generics.GenericAPIView
-    ):
-        queryset = Actor.objects.all()
-        serializer_class = ActorSerializer
+):
+    queryset = Actor.objects.all()
+    serializer_class = ActorSerializer
 
-        def get(self, request, *args, **kwargs):
-            return self.list(request, *args, **kwargs)
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
 
-        def post(self, request, *args, **kwargs):
-            return self.create(request, *args, **kwargs)
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
 
 
 class ActorRetrieveUpdateDestroyAPIView(
@@ -104,18 +108,18 @@ class ActorRetrieveUpdateDestroyAPIView(
         mixins.UpdateModelMixin,
         mixins.DestroyModelMixin,
         generics.GenericAPIView
-    ):
-        queryset = Actor.objects.all()
-        serializer_class = ActorSerializer
+):
+    queryset = Actor.objects.all()
+    serializer_class = ActorSerializer
 
-        def get(self, request, *args, **kwargs):
-            return self.retrieve(request, *args, **kwargs)
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
 
-        def put(self, request, *args, **kwargs):
-            return self.update(request, *args, **kwargs)
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
 
-        def delete(self, request, *args, **kwargs):
-            return self.destroy(request, *args, **kwargs)
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
 
 
 class CinemaHallViewSet(

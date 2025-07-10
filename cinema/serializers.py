@@ -41,6 +41,7 @@ class CinemaHallSerializer(serializers.Serializer):
     def create(self, validated_data):
         return CinemaHall.objects.create(**validated_data)
 
+
 class ActorSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     first_name = serializers.CharField(max_length=255)
